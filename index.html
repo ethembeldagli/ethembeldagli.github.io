@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Zalgo Ethem Loop</title>
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    h1 {
+      font-size: 3em;
+      font-family: monospace, sans-serif;
+      white-space: pre;
+    }
+    .ethem {
+      color: #4AF626;
+      margin-left: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="msg"><span>i am</span> <span class="ethem">ethem</span></h1>
+  <script>
+    const zalgos=[
+      "ethem","e͒̾t̴͜h̵̓e̵̠m̴̢","e̸͑t̶̋h̸͚e̸͒m̸̂","ḛ̶t̸̗h̶̊e̸͗m̴͙","ȇ̸t̴͠h̷̪ȅ̶m̴͎","ė̴t̴͂h̶̼e̶̊m̴̩",
+      "ë̴t̴̳h̸̅e̶̅m̸̯","ȇ̸t̶̾h̶̤e̸̐m̴͓","ě̶ẗ̵́h̷̰é̶m̴̠","ȅ̸t̷̻h̴̾e̵͝m̸͔","e̵͋t̸̫h̴̿e̵̳m̵̾",
+      "e̸͋t̵̑h̷̡e̴̕m̷̛","e̸͋t̵͑h̶̲e̸͝m̵͘","e̶̐t̸͊h̶͍e̸̓m̶͆","é̸t̷̎h̷̩é̷m̸̷","ë̸t̷̛h̸͓e̸͆m̴̱",
+      "e̴̦t̵͉h̸̘ȅ̴m̸̑","ĕ̷t̸͉h̴͖e̴̹m̶͝","e̸̵t̷̚h̸̃e̸͒m̵̜","e̴̛t̶͈h̶͎e̸̞m̸̊","ë̸́t̸̢h̸̎e̸̛m̸̍",
+      "e̵̱t̸̰h̴̩e̵̩m̵̮","e̴͔t̵͉h̷̪e̸͂m̵̤"
+    ];
+    setInterval(()=>{
+      document.getElementById("msg").innerHTML =
+        '<span>i am</span> <span class="ethem">' + 
+        zalgos[Math.floor(Math.random()*zalgos.length)] + 
+        '</span>';
+    },100);
+  </script>
+</body>
+</html>
