@@ -9,7 +9,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://github.com/tholman/overscroll/raw/refs/heads/master/overscroll.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.min.css">
+<style>
+    @keyframes float{0%,100%{transform:translateY(0) rotateX(0)}50%{transform:translateY(-20px) rotateX(5deg)}}@keyframes liquidPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}.liquid-bg{transition:opacity 2s cubic-bezier(.4,0,.2,1),transform 2s cubic-bezier(.4,0,.2,1)}.project-item{transition:all .6s cubic-bezier(.34,1.56,.64,1);transform-style:preserve-3d}.project-item:hover{transform:translateX(20px) scale(1.05) rotateY(5deg)}.modal-content{animation:modalFloat 3s ease-in-out infinite}@keyframes modalFloat{0%,100%{transform:translateY(0) rotateX(0)}50%{transform:translateY(-10px) rotateX(2deg)}}.glass-effect{background:rgba(0,0,0,.4);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}.liquid-border{position:relative;overflow:hidden}.liquid-border::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:2px;background:linear-gradient(45deg,rgba(255,255,255,.1),rgba(255,255,255,.3),rgba(255,255,255,.1));-webkit-mask:linear-gradient(#fff 0) content-box,linear-gradient(#fff 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:liquidPulse 3s ease-in-out infinite}.floating-element{animation:float 6s ease-in-out infinite}.bg-transition{position:fixed;inset:0;background-size:cover;background-position:center;transition:opacity 1.5s cubic-bezier(.4,0,.2,1)}.easter-egg-top{width:200px;height:200px;position:fixed;left:50%;top:0;margin-left:-100px;margin-top:-200px;z-index:9999;pointer-events:none}.easter-egg-bottom{width:200px;height:200px;position:fixed;left:50%;bottom:0;margin-left:-100px;margin-bottom:-200px;z-index:9999;pointer-events:none}
+</style>
 </head>
 <body class="bg-black relative overflow-x-hidden" style="height: auto; min-height: 100%;" x-data="{ 
     showModal: false, 
