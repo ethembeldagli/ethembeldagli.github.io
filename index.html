@@ -115,13 +115,13 @@
             name: 'My Project Website',
             description: '(This website)',
             image: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=1200&h=800&fit=crop',
-            link: 'https://demo.example.com',
-            github: 'https://github.com/username/lms-platform'
+            link: 'https://ethembeldagli.github.io',
+            github: 'https://github.com/ethembeldagli/ethembeldagli.github.io/tree/main'
         }
     ],
     setBackground(image) {
         this.currentBg = image;
-        this.bgOpacity = 0.3;
+        this.bgOpacity = 0.5;
     },
     clearBackground() {
         this.bgOpacity = 0;
@@ -134,10 +134,7 @@
         stagger: 0.1,
         ease: 'power3.out'
     });
-">
-    <img class="easter-egg-top" src="https://github.com/tholman/overscroll/blob/6a2cf21ebf884b278b5abbefd34a799eeb9f4417/demo/img/cat-1.png?raw=true" alt="Easter Egg Top">
-    <img class="easter-egg-bottom" src="https://github.com/tholman/overscroll/blob/6a2cf21ebf884b278b5abbefd34a799eeb9f4417/demo/img/cat-1.png?raw=true" alt="Easter Egg Bottom">
-    <div class="fixed inset-0 bg-black z-0"></div>
+">  <div class="fixed inset-0 bg-black z-0"></div>
     <div class="bg-transition z-0" :style="'background-image: url(' + currentBg + '); opacity: ' + bgOpacity + ';'"></div>
     <div class="relative z-10 flex flex-col items-center">
         <section class="py-16 px-8 md:px-16 w-full max-w-4xl">
