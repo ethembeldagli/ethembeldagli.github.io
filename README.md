@@ -1,1 +1,1 @@
-# ethembeldagli.github.io
+[# ethembeldagli.vercel.app](https://ethem-beldagli.vercel.app)
