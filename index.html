@@ -3,12 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ethem Beldagli</title>
+    <title>Ethem Beldagli - Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://github.com/tholman/overscroll/raw/refs/heads/master/overscroll.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotateX(0deg); }
+            50% { transform: translateY(-20px) rotateX(5deg); }
+        }
+        
+        @keyframes liquidPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .liquid-bg {
+            transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1), 
+                        transform 2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .project-item {
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+        }
+        
+        .project-item:hover {
+            transform: translateX(20px) scale(1.05) rotateY(5deg);
+        }
+        
+        .modal-content {
+            animation: modalFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes modalFloat {
+            0%, 100% { transform: translateY(0px) rotateX(0deg); }
+            50% { transform: translateY(-10px) rotateX(2deg); }
+        }
+        
+        .glass-effect {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        
+        .liquid-border {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .liquid-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 2px;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: liquidPulse 3s ease-in-out infinite;
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .bg-transition {
+            position: fixed;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .easter-egg-top {
+            width: 200px;
+            height: 200px;
+            position: fixed;
+            left: 50%;
+            top: 0px;
+            margin-left: -100px;
+            margin-top: -200px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        
+        .easter-egg-bottom {
+            width: 200px;
+            height: 200px;
+            position: fixed;
+            left: 50%;
+            bottom: 0px;
+            margin-left: -100px;
+            margin-bottom: -200px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body class="bg-black relative overflow-x-hidden" style="height: auto; min-height: 100%;" x-data="{ 
     showModal: false, 
@@ -22,18 +116,32 @@
             image: '/img/1.png',
             link: 'https://ethembeldagli.github.io',
             github: 'https://github.com/ethembeldagli/ethembeldagli.github.io/tree/main'
-        }
-          {
+        },
+        {
             name: 'Elastic Cursor Effect',
             description: 'A website where there is a cool elastic cursor effect',
             image: '/img/2.png',
             link: 'https://ethembeldagli.github.io/elasticcursoreffects',
             github: 'https://github.com/ethembeldagli/elasticcursoreffect'
+        },
+        {
+            name: 'Pointless Projects',
+            description: 'Very pointless projects',
+            image: '/img/3.png',
+            link: 'https://ethembeldagli.github.io/pointlessprojects',
+            github: 'https://github.com/ethembeldagli/pointlessprojects'
+        },
+        {
+            name: 'Its Ethem Miss',
+            description: 'A team of friends and their projects (mostly made by me)',
+            image: '/img/3.png',
+            link: 'https://itsethemmiss.github.io',
+            github: 'https://github.com/itsethemmiss/itsethemmiss.github.io'
         }
     ],
     setBackground(image) {
         this.currentBg = image;
-        this.bgOpacity = 0.5;
+        this.bgOpacity = 0.3;
     },
     clearBackground() {
         this.bgOpacity = 0;
@@ -46,7 +154,10 @@
         stagger: 0.1,
         ease: 'power3.out'
     });
-">  <div class="fixed inset-0 bg-black z-0"></div>
+">
+    <img class="easter-egg-top" src="https://github.com/tholman/overscroll/blob/6a2cf21ebf884b278b5abbefd34a799eeb9f4417/demo/img/cat-1.png?raw=true" alt="Easter Egg Top">
+    <img class="easter-egg-bottom" src="https://github.com/tholman/overscroll/blob/6a2cf21ebf884b278b5abbefd34a799eeb9f4417/demo/img/cat-1.png?raw=true" alt="Easter Egg Bottom">
+    <div class="fixed inset-0 bg-black z-0"></div>
     <div class="bg-transition z-0" :style="'background-image: url(' + currentBg + '); opacity: ' + bgOpacity + ';'"></div>
     <div class="relative z-10 flex flex-col items-center">
         <section class="py-16 px-8 md:px-16 w-full max-w-4xl">
@@ -54,19 +165,17 @@
                 <div class="flex flex-col items-center gap-6 mb-8 text-center glass-effect rounded-3xl p-8 liquid-border">
                     <div class="flex-1">
                         <h1 class="text-3xl md:text-4xl font-bold italic text-white mb-2">Ethem Beldagli</h1>
-                        <p class="text-lg font-bold italic text-white/50 mb-4">A good dev</p>
-                        <p class="text-sm font-bold italic text-white/40 leading-relaxed mb-4">I like coding</p>
-                        <p class="text-sm font-bold italic text-white/40 leading-relaxed mb-4">(adding my projects to this website. It is new)</p>
+                        <p class="text-lg font-bold italic text-white/50 mb-4">A Good Dev</p>
+                        <p class="text-sm font-bold italic text-white/40 leading-relaxed mb-4">I mostly create websites in HTML.</p>
                         <div class="flex gap-3 justify-center">
-                            <a href="https://github.com/ethembeldagli" class="w-10 h-10 glass-effect border border-white/10 rounded-full flex items-center justify-center hover:bg-white/10 transition-all text-white/70 hover:text-white hover:scale-110 hover:rotate-12">
+                            <a href="https://github.com/ethembeldagli" target="_blank" class="w-10 h-10 glass-effect border border-white/10 rounded-full flex items-center justify-center hover:bg-white/10 transition-all text-white/70 hover:text-white hover:scale-110 hover:rotate-12">
                                 <i class="fab fa-github"></i>
                             </a>
-                           
                         </div>
                     </div>
                 </div>
             </div>
-            <h2 class="text-2xl md:text-3xl font-bold italic text-white mb-8 text-center floating-element">Projects</h2>
+            <h2 class="text-2xl md:text-3xl font-bold italic text-white mb-8 text-center floating-element">Projects (more coming soon)</h2>
             <div class="space-y-3 flex flex-col items-center">
                 <template x-for="(project, index) in projects" :key="index">
                     <div @mouseenter="setBackground(project.image)" @mouseleave="clearBackground()" @click="selectedProject = project; showModal = true" class="project-item glass-effect border border-white/10 rounded-l-full rounded-r-lg hover:border-white/30 cursor-pointer px-8 py-5 w-full max-w-md group liquid-border floating-element" :style="'animation-delay: ' + (index * 0.1) + 's'">
