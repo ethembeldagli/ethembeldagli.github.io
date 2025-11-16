@@ -9,7 +9,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://github.com/tholman/overscroll/raw/refs/heads/master/overscroll.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-black relative overflow-x-hidden" style="height: auto; min-height: 100%;" x-data="{ 
     showModal: false, 
@@ -21,9 +20,16 @@
         {
             name: 'My Project Website',
             description: '(This website)',
-            image: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=1200&h=800&fit=crop',
+            image: '/img/1.png',
             link: 'https://ethembeldagli.github.io',
             github: 'https://github.com/ethembeldagli/ethembeldagli.github.io/tree/main'
+        }
+          {
+            name: 'Elastic Cursor Effect',
+            description: 'A website where there is a cool elastic cursor effect',
+            image: '/img/2.png',
+            link: 'https://ethembeldagli.github.io/elasticcursoreffects',
+            github: 'https://github.com/ethembeldagli/elasticcursoreffect'
         }
     ],
     setBackground(image) {
