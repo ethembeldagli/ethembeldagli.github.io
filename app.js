@@ -1,13 +1,6 @@
 // Project data
 const projects = [
     {
-        name: 'My Project Website',
-        description: '(This website)',
-        image: '/img/1.png',
-        link: 'https://ethembeldagli.github.io',
-        github: 'https://github.com/ethembeldagli/ethembeldagli.github.io/tree/main'
-    },
-    {
         name: 'Elastic Cursor Effect',
         description: 'A website where there is a cool elastic cursor effect',
         image: '/img/2.png',
