@@ -1,681 +1,291 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: auto; min-height: 100%;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ethem Beldagli - Projects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://github.com/tholman/overscroll/raw/refs/heads/master/overscroll.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-:root {
-  /* Primitive Color Tokens */
-  --color-white: rgba(255, 255, 255, 1);
-  --color-black: rgba(0, 0, 0, 1);
-  --color-cream-50: rgba(252, 252, 249, 1);
-  --color-cream-100: rgba(255, 255, 253, 1);
-  --color-gray-200: rgba(245, 245, 245, 1);
-  --color-gray-300: rgba(167, 169, 169, 1);
-  --color-gray-400: rgba(119, 124, 124, 1);
-  --color-slate-500: rgba(98, 108, 113, 1);
-  --color-brown-600: rgba(94, 82, 64, 1);
-  --color-charcoal-700: rgba(31, 33, 33, 1);
-  --color-charcoal-800: rgba(38, 40, 40, 1);
-  --color-slate-900: rgba(19, 52, 59, 1);
-  --color-teal-300: rgba(50, 184, 198, 1);
-  --color-teal-400: rgba(45, 166, 178, 1);
-  --color-teal-500: rgba(33, 128, 141, 1);
-  --color-teal-600: rgba(29, 116, 128, 1);
-  --color-teal-700: rgba(26, 104, 115, 1);
-  --color-teal-800: rgba(41, 150, 161, 1);
-  --color-red-400: rgba(255, 84, 89, 1);
-  --color-red-500: rgba(192, 21, 47, 1);
-  --color-orange-400: rgba(230, 129, 97, 1);
-  --color-orange-500: rgba(168, 75, 47, 1);
-
-  /* RGB versions for opacity control */
-  --color-brown-600-rgb: 94, 82, 64;
-  --color-teal-500-rgb: 33, 128, 141;
-  --color-slate-900-rgb: 19, 52, 59;
-  --color-slate-500-rgb: 98, 108, 113;
-  --color-red-500-rgb: 192, 21, 47;
-  --color-red-400-rgb: 255, 84, 89;
-  --color-orange-500-rgb: 168, 75, 47;
-  --color-orange-400-rgb: 230, 129, 97;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    height: 100%;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    overflow-x: hidden;
-}
-
-body {
-    background: #000;
-    color: #fff;
-}
-
-/* Liquid Animation Keyframes */
-@keyframes liquidFloat {
-    0%, 100% { 
-        transform: translateY(0px) scale(1);
-    }
-    50% { 
-        transform: translateY(-15px) scale(1.02);
-    }
-}
-
-@keyframes liquidPulse {
-    0%, 100% { 
-        transform: scale(1) rotate(0deg);
-    }
-    25% { 
-        transform: scale(1.05) rotate(1deg);
-    }
-    50% { 
-        transform: scale(1.02) rotate(0deg);
-    }
-    75% { 
-        transform: scale(1.05) rotate(-1deg);
-    }
-}
-
-@keyframes liquidBorder {
-    0% { 
-        transform: rotate(0deg) scale(1);
-        filter: hue-rotate(0deg);
-    }
-    50% { 
-        transform: rotate(180deg) scale(1.1);
-        filter: hue-rotate(180deg);
-    }
-    100% { 
-        transform: rotate(360deg) scale(1);
-        filter: hue-rotate(360deg);
-    }
-}
-
-@keyframes gooeyBlob {
-    0%, 100% { 
-        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-    }
-    25% { 
-        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-    }
-    50% { 
-        border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%;
-    }
-    75% { 
-        border-radius: 60% 40% 60% 40% / 70% 30% 50% 60%;
-    }
-}
-
-@keyframes modalBounce {
-    0% { 
-        transform: scale(0.3) rotate(-5deg);
-        opacity: 0;
-    }
-    50% { 
-        transform: scale(1.05) rotate(2deg);
-    }
-    70% { 
-        transform: scale(0.95) rotate(-1deg);
-    }
-    100% { 
-        transform: scale(1) rotate(0deg);
-        opacity: 1;
-    }
-}
-
-@keyframes shimmer {
-    0% { 
-        background-position: -1000px 0;
-    }
-    100% { 
-        background-position: 1000px 0;
-    }
-}
-
-@keyframes gradientFlow {
-    0% { 
-        background-position: 0% 50%;
-    }
-    50% { 
-        background-position: 100% 50%;
-    }
-    100% { 
-        background-position: 0% 50%;
-    }
-}
-
-/* Fixed Background Layer */
-.fixed-bg {
-    position: fixed;
-    inset: 0;
-    background: #000;
-    z-index: 0;
-}
-
-/* Liquid Background Transition */
-.bg-transition {
-    position: fixed;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1),
-                filter 1.2s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1;
-    filter: blur(0px) brightness(0.6);
-}
-
-.bg-transition.active {
-    filter: blur(8px) brightness(0.4);
-    transform: scale(1.1);
-}
-
-/* Liquid Distortion Effect */
-.liquid-distortion {
-    position: relative;
-    overflow: hidden;
-}
-
-.liquid-distortion::before {
-    content: '';
-    position: absolute;
-    inset: -50%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.6s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none;
-    z-index: 2;
-}
-
-.liquid-distortion:hover::before {
-    opacity: 1;
-    animation: liquidPulse 2s ease-in-out infinite;
-}
-
-/* Content Container */
-.content-container {
-    position: relative;
-    z-index: 10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem 1rem;
-}
-
-/* Glass Effect */
-.glass-effect {
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.glass-effect:hover {
-    background: rgba(0, 0, 0, 0.5);
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-}
-
-/* Header Section */
-.header-card {
-    max-width: 600px;
-    width: 100%;
-    padding: 2rem;
-    border-radius: 2rem;
-    margin-bottom: 3rem;
-    animation: liquidFloat 6s ease-in-out infinite;
-    position: relative;
-}
-
-.header-card::after {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(45deg, 
-        rgba(50, 184, 198, 0.3), 
-        rgba(168, 75, 47, 0.3), 
-        rgba(50, 184, 198, 0.3));
-    background-size: 200% 200%;
-    border-radius: inherit;
-    z-index: -1;
-    animation: gradientFlow 3s ease infinite;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-}
-
-.header-card:hover::after {
-    opacity: 1;
-}
-
-/* Title Styles */
-.title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    font-style: italic;
-    margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, #fff 0%, #32b8c6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.subtitle {
-    font-size: 1.25rem;
-    font-weight: 600;
-    font-style: italic;
-    color: rgba(255, 255, 255, 0.5);
-    margin-bottom: 1rem;
-}
-
-.description {
-    font-size: 0.875rem;
-    font-style: italic;
-    color: rgba(255, 255, 255, 0.4);
-    margin-bottom: 1.5rem;
-}
-
-/* Social Link */
-.social-link {
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.7);
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    position: relative;
-    overflow: hidden;
-}
-
-.social-link::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle, rgba(50, 184, 198, 0.4) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-
-.social-link:hover {
-    transform: scale(1.15) rotate(12deg);
-    background: rgba(50, 184, 198, 0.2);
-    border-color: rgba(50, 184, 198, 0.5);
-    color: #fff;
-    box-shadow: 0 0 20px rgba(50, 184, 198, 0.5);
-}
-
-.social-link:hover::before {
-    opacity: 1;
-}
-
-/* Section Title */
-.section-title {
-    font-size: 2rem;
-    font-weight: 700;
-    font-style: italic;
-    text-align: center;
-    margin-bottom: 2rem;
-    animation: liquidFloat 5s ease-in-out infinite;
-    animation-delay: 0.3s;
-}
-
-/* Project Items */
-.projects-container {
-    width: 100%;
-    max-width: 500px;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.project-item {
-    padding: 1.25rem 2rem;
-    border-radius: 9999px 1rem 1rem 9999px;
-    cursor: pointer;
-    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    position: relative;
-    overflow: visible;
-    transform-style: preserve-3d;
-    opacity: 0;
-    transform: translateY(30px);
-}
-
-.project-item.animate-in {
-    animation: slideInProject 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes slideInProject {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.project-item::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: linear-gradient(90deg, 
-        rgba(50, 184, 198, 0.2), 
-        rgba(168, 75, 47, 0.2),
-        rgba(50, 184, 198, 0.2));
-    background-size: 200% 100%;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    z-index: -1;
-    filter: blur(10px);
-}
-
-.project-item:hover {
-    transform: translateX(15px) scale(1.05) rotateY(3deg);
-    box-shadow: 0 10px 40px rgba(50, 184, 198, 0.3);
-}
-
-.project-item:hover::before {
-    opacity: 1;
-    animation: shimmer 2s linear infinite;
-}
-
-.project-name {
-    font-size: 0.875rem;
-    font-weight: 600;
-    font-style: italic;
-    color: rgba(255, 255, 255, 0.7);
-    transition: color 0.4s ease;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-}
-
-.project-item:hover .project-name {
-    color: #fff;
-}
-
-/* Gooey Button Effect */
-.gooey-button {
-    position: relative;
-    padding: 0.75rem 1.5rem;
-    border-radius: 9999px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(0, 0, 0, 0.4);
-    color: #fff;
-    font-size: 0.875rem;
-    font-weight: 600;
-    font-style: italic;
-    cursor: pointer;
-    overflow: hidden;
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    text-decoration: none;
-}
-
-.gooey-button::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle, rgba(50, 184, 198, 0.6) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    transform: scale(0);
-}
-
-.gooey-button:hover {
-    transform: scale(1.05) rotate(2deg);
-    background: rgba(50, 184, 198, 0.3);
-    border-color: rgba(50, 184, 198, 0.6);
-    box-shadow: 0 0 30px rgba(50, 184, 198, 0.4);
-}
-
-.gooey-button:hover::before {
-    opacity: 1;
-    transform: scale(1.5);
-    animation: gooeyBlob 2s ease-in-out infinite;
-}
-
-.gooey-button:active {
-    transform: scale(0.95);
-}
-
-/* Modal Overlay */
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    z-index: 1000;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-.modal-overlay.show {
-    opacity: 1;
-}
-
-/* Modal Content */
-.modal-content {
-    max-width: 700px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    border-radius: 2rem;
-    position: relative;
-    animation: modalBounce 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.modal-content::after {
-    content: '';
-    position: absolute;
-    inset: -3px;
-    background: linear-gradient(135deg, 
-        rgba(50, 184, 198, 0.4), 
-        rgba(168, 75, 47, 0.4), 
-        rgba(50, 184, 198, 0.4));
-    background-size: 200% 200%;
-    border-radius: inherit;
-    z-index: -1;
-    animation: gradientFlow 4s ease infinite;
-}
-
-.modal-image-container {
-    position: relative;
-    width: 100%;
-    height: 16rem;
-    overflow: hidden;
-    border-radius: 2rem 2rem 0 0;
-}
-
-.modal-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
-                filter 0.8s ease;
-}
-
-.modal-content:hover .modal-image {
-    transform: scale(1.1);
-    filter: brightness(1.1);
-}
-
-.close-button {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    z-index: 10;
-    color: #fff;
-}
-
-.close-button:hover {
-    transform: rotate(90deg) scale(1.1);
-    background: rgba(192, 21, 47, 0.8);
-    border-color: rgba(255, 84, 89, 0.6);
-    box-shadow: 0 0 20px rgba(255, 84, 89, 0.5);
-}
-
-.modal-body {
-    padding: 2rem;
-}
-
-.modal-title {
-    font-size: 1.75rem;
-    font-weight: 700;
-    font-style: italic;
-    margin-bottom: 1rem;
-}
-
-.modal-description {
-    font-size: 0.875rem;
-    font-style: italic;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-}
-
-.modal-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-@media (min-width: 640px) {
-    .modal-buttons {
-        flex-direction: row;
-    }
-    
-    .gooey-button {
-        flex: 1;
-    }
-}
-
-/* Hide scrollbar for modal */
-.modal-content::-webkit-scrollbar {
-    width: 6px;
-}
-
-.modal-content::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-}
-
-.modal-content::-webkit-scrollbar-thumb {
-    background: rgba(50, 184, 198, 0.5);
-    border-radius: 10px;
-}
-
-.modal-content::-webkit-scrollbar-thumb:hover {
-    background: rgba(50, 184, 198, 0.7);
-}
-
-/* Hidden class */
-.hidden {
-    display: none !important;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .title {
-        font-size: 2rem;
-    }
-    
-    .section-title {
-        font-size: 1.5rem;
-    }
-    
-    .project-item {
-        padding: 1rem 1.5rem;
-    }
-}
-
-/* Smooth scroll */
-html {
-    scroll-behavior: smooth;
-}
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotateX(0deg); }
+            50% { transform: translateY(-20px) rotateX(5deg); }
+        }
+        
+        @keyframes liquidPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .liquid-bg {
+            transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1), 
+                        transform 2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .project-item {
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+        }
+        
+        .project-item:hover {
+            transform: translateX(20px) scale(1.05) rotateY(5deg);
+        }
+        
+        .modal-content {
+            animation: modalFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes modalFloat {
+            0%, 100% { transform: translateY(0px) rotateX(0deg); }
+            50% { transform: translateY(-10px) rotateX(2deg); }
+        }
+        
+        .glass-effect {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        
+        .liquid-border {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .liquid-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 2px;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: liquidPulse 3s ease-in-out infinite;
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .bg-transition {
+            position: fixed;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .easter-egg-top {
+            width: 200px;
+            height: 200px;
+            position: fixed;
+            left: 50%;
+            top: 0px;
+            margin-left: -100px;
+            margin-top: -200px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        
+        .easter-egg-bottom {
+            width: 200px;
+            height: 200px;
+            position: fixed;
+            left: 50%;
+            bottom: 0px;
+            margin-left: -100px;
+            margin-bottom: -200px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .button-bg-blur {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            filter: blur(12px);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            border-radius: 9999px;
+            z-index: -1;
+        }
+
+        .button-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .github-corner {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .github-corner svg {
+            fill: #fff;
+            color: #151513;
+            border: 0;
+        }
+
+        .github-corner:hover .octo-arm {
+            animation: octocat-wave 560ms ease-in-out;
+        }
+
+        @keyframes octocat-wave {
+            0%, 100% { transform: rotate(0); }
+            20%, 60% { transform: rotate(-25deg); }
+            40%, 80% { transform: rotate(10deg); }
+        }
+
+        @media (max-width: 500px) {
+            .github-corner:hover .octo-arm {
+                animation: none;
+            }
+            .github-corner .octo-arm {
+                animation: octocat-wave 560ms ease-in-out;
+            }
+        }
     </style>
 </head>
-<body>
-    <div class="fixed-bg"></div>
-    <div class="bg-transition" id="bgTransition"></div>
-    <a href="https://your-url" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#fff; color:#151513; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
-    <div class="content-container">
-        <section>
-            <div class="header-card glass-effect" id="headerCard">
-                <div style="text-align: center;">
-                    <h1 class="title">Ethem Beldagli</h1>
-                    <p class="subtitle">A Good Dev</p>
-                    <p class="description">I mostly create websites in HTML.</p>
-                    <p class="description">Check me out on:</p>
-                    <div style="display: flex; justify-content: center; gap: 0.75rem;">
-                        <a href="https://github.com/ethembeldagli" target="_blank" class="social-link">
-                            <i class="fab fa-github"></i>
-                        </a>
+<body class="bg-black relative overflow-x-hidden" style="height: auto; min-height: 100%;" x-data="{ 
+    showModal: false, 
+    selectedProject: null,
+    currentBg: '',
+    bgOpacity: 0,
+    buttonBgStyle: '',
+    buttonBgOpacity: 0,
+    projects: [
+        {
+            name: 'Elastic Cursor Effect',
+            description: 'A website where there is a cool elastic cursor effect',
+            image: '/img/2.png',
+            link: 'https://ethembeldagli.github.io/elasticcursoreffects',
+            github: 'https://github.com/ethembeldagli/elasticcursoreffect'
+        },
+        {
+            name: 'Pointless Projects',
+            description: 'Very pointless projects',
+            image: '/img/3.png',
+            link: 'https://ethembeldagli.github.io/pointlessprojects',
+            github: 'https://github.com/ethembeldagli/pointlessprojects'
+        },
+        {
+            name: 'Its Ethem Miss',
+            description: 'A team of friends and their projects (mostly made by me)',
+            image: '/img/4.png',
+            link: 'https://itsethemmiss.github.io',
+            github: 'https://github.com/itsethemmiss/itsethemmiss.github.io'
+        },
+        {
+            name: 'Pls Pet Doge',
+            description: 'A doge that wants to be petted',
+            image: '/img/5.png',
+            link: 'https://ethembeldagli.github.io/plspetdoge',
+            github: 'https://github.com/ethembeldagli/plspetdoge'
+        }
+    ],
+    setBackground(image) {
+        this.currentBg = image;
+        this.bgOpacity = 0.45;
+    },
+    clearBackground() {
+        this.bgOpacity = 0;
+    }
+}" x-init="
+    gsap.from('.floating-element', {
+        y: 50,
+        opacity: 0,
+        duration: 1.5,
+        stagger: 0.1,
+        ease: 'power3.out'
+    });
+">
+    <a href="https://github.com/ethembeldagli/ethembeldagli.github.io" class="github-corner" aria-label="View source on GitHub" target="_blank">
+        <svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true">
+            <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/>
+            <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/>
+            <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/>
+        </svg>
+    </a>
+
+    <img class="easter-egg-top" src="https://github.com/tholman/overscroll/blob/6a2cf21ebf884b278b5abbefd34a799eeb9f4417/demo/img/cat-1.png?raw=true" alt="Easter Egg Top">
+    <img class="easter-egg-bottom" src="https://github.com/tholman/overscroll/blob/6a2cf21ebf884b278b5abbefd34a799eeb9f4417/demo/img/cat-1.png?raw=true" alt="Easter Egg Bottom">
+    <div class="fixed inset-0 bg-black z-0"></div>
+    <div class="bg-transition z-0" :style="'background-image: url(' + currentBg + '); opacity: ' + bgOpacity + ';'"></div>
+    <div class="relative z-10 flex flex-col items-center">
+        <section class="py-16 px-8 md:px-16 w-full max-w-4xl">
+            <div class="mb-16 flex flex-col items-center floating-element">
+                <div class="flex flex-col items-center gap-6 mb-8 text-center glass-effect rounded-3xl p-8 liquid-border">
+                    <div class="flex-1">
+                        <h1 class="text-3xl md:text-4xl font-bold italic text-white mb-2">Ethem Beldagli</h1>
+                        <p class="text-lg font-bold italic text-white/50 mb-4">A Good Dev</p>
+                        <p class="text-sm font-bold italic text-white/40 leading-relaxed mb-4">I mostly create websites in HTML.</p>
+                        <div class="flex gap-3 justify-center">
+                            <a href="https://github.com/ethembeldagli" target="_blank" class="w-10 h-10 glass-effect border border-white/10 rounded-full flex items-center justify-center hover:bg-white/10 transition-all text-white/70 hover:text-white hover:scale-110 hover:rotate-12">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <h2 class="section-title">Projects (more coming soon)</h2>
-            
-            <div class="projects-container" id="projectsContainer"></div>
+            <h2 class="text-2xl md:text-3xl font-bold italic text-white mb-8 text-center floating-element">Projects (more coming soon)</h2>
+            <div class="space-y-3 flex flex-col items-center">
+                <template x-for="(project, index) in projects" :key="index">
+                    <div @mouseenter="setBackground(project.image)" @mouseleave="clearBackground()" @click="selectedProject = project; showModal = true" class="project-item glass-effect border border-white/10 rounded-l-full rounded-r-lg hover:border-white/30 cursor-pointer px-8 py-5 w-full max-w-md group liquid-border floating-element" :style="'animation-delay: ' + (index * 0.1) + 's'">
+                        <span class="relative z-10 text-sm font-bold italic text-white/70 group-hover:text-white transition-colors text-center block" x-text="project.name"></span>
+                    </div>
+                </template>
+            </div>
         </section>
     </div>
-    
-    <div class="modal-overlay hidden" id="modalOverlay">
-        <div class="modal-content glass-effect liquid-distortion">
-            <div class="modal-image-container">
-                <button class="close-button" id="closeButton">
-                    <i class="fas fa-times"></i>
+    <div x-show="showModal" x-cloak @click.self="showModal = false" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50" style="display: none;">
+        <div @click.away="showModal = false" x-transition:enter="transition ease-out duration-700 transform" x-transition:enter-start="opacity-0 scale-75 rotate-3" x-transition:enter-end="opacity-100 scale-100 rotate-0" x-transition:leave="transition ease-in duration-300 transform" x-transition:leave-start="opacity-100 scale-100 rotate-0" x-transition:leave-end="opacity-0 scale-75 -rotate-3" class="modal-content glass-effect border border-white/20 rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto liquid-border">
+            <div class="relative">
+                <button @click="showModal = false" class="absolute top-4 right-4 w-10 h-10 glass-effect border border-white/20 rounded-full flex items-center justify-center hover:bg-white/20 hover:rotate-90 transition-all duration-500 z-10">
+                    <i class="fas fa-times text-white"></i>
                 </button>
-                <img src="" alt="" class="modal-image" id="modalImage">
+                <img :src="selectedProject?.image" :alt="selectedProject?.name" class="w-full h-64 object-cover rounded-t-3xl">
             </div>
-            <div class="modal-body">
-                <h3 class="modal-title" id="modalTitle"></h3>
-                <p class="modal-description" id="modalDescription"></p>
-                <div class="modal-buttons">
-                    <a href="" target="_blank" class="gooey-button" id="liveDemoButton">
-                        <i class="fas fa-external-link-alt"></i>
-                        Live Demo
+            <div class="p-8">
+                <h3 class="text-2xl font-bold italic text-white mb-4" x-text="selectedProject?.name"></h3>
+                <p class="text-white/60 text-sm font-bold italic leading-relaxed mb-6" x-text="selectedProject?.description"></p>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <a :href="selectedProject?.link" target="_blank" 
+                        class="flex-1 glass-effect border border-white/20 text-white text-center py-3 px-6 rounded-full hover:bg-white/20 hover:scale-105 hover:-rotate-1 transition-all duration-500 text-sm font-bold italic button-container"
+                        @mouseenter="buttonBgStyle = 'url(' + selectedProject.image + ')'; buttonBgOpacity = 0.5"
+                        @mouseleave="buttonBgOpacity = 0"
+                    >
+                        <div class="button-bg-blur" :style="`background-image: ${buttonBgStyle}; opacity: ${buttonBgOpacity}`"></div>
+                        <i class="fas fa-external-link-alt mr-2"></i>Live Demo
                     </a>
-                    <a href="" target="_blank" class="gooey-button" id="githubButton">
-                        <i class="fab fa-github"></i>
-                        GitHub
+                    <a :href="selectedProject?.github" target="_blank"
+                        class="flex-1 glass-effect border border-white/20 text-white text-center py-3 px-6 rounded-full hover:bg-white/20 hover:scale-105 hover:rotate-1 transition-all duration-500 text-sm font-bold italic button-container"
+                        @mouseenter="buttonBgStyle = 'url(' + selectedProject.image + ')'; buttonBgOpacity = 0.5"
+                        @mouseleave="buttonBgOpacity = 0"
+                    >
+                        <div class="button-bg-blur" :style="`background-image: ${buttonBgStyle}; opacity: ${buttonBgOpacity}`"></div>
+                        <i class="fab fa-github mr-2"></i>GitHub
                     </a>
                 </div>
             </div>
         </div>
     </div>
-    
-    <script src="app.js"></script>
+    <script>
+        window.onload = function() {
+            var overscroll = new Overscroll();
+            overscroll.bindElement(document.querySelector('.easter-egg-top'), 'top', 2);
+            overscroll.bindElement(document.querySelector('.easter-egg-bottom'), 'bottom', 2);
+        }
+    </script>
 </body>
 </html>
