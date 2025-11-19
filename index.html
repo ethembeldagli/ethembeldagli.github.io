@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ethem Beldagli - Portfolio</title>
-<meta name="description" content="Ethem Beldagli's professional portfolio showcasing skills, projects, and availability for hire. Visit https://ethembeldagli.github.io to learn more. Made by Ethem Beldagli.">
+<meta name="description" content="Ethem Beldagli's professional portfolio showcasing skills, projects, and availability for hire. Visit [https://ethembeldagli.github.io](https://ethembeldagli.github.io) to learn more. Made by Ethem Beldagli.">
 <meta name="keywords" content="Ethem Beldagli, portfolio, web developer, programmer, hire, projects">
 <meta name="author" content="Ethem Beldagli">
 <meta name="robots" content="index, follow">
 
 <!-- Open Graph tags for social sharing -->
 <meta property="og:title" content="Ethem Beldagli - Portfolio">
-<meta property="og:description" content="Explore the portfolio of Ethem Beldagli, available for hire. Check out projects and skills at https://ethembeldagli.github.io.">
+<meta property="og:description" content="Explore the portfolio of Ethem Beldagli, available for hire. Check out projects and skills at [https://ethembeldagli.github.io](https://ethembeldagli.github.io).">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ethembeldagli.github.io/">
 <meta property="og:image" content="https://github.com/ethembeldagli/ethembeldagli.github.io/9d966c989a485296609d890a42e62568d7c09d00/icon.png">
@@ -18,7 +19,7 @@
 <!-- Twitter Card tags -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ethem Beldagli - Portfolio">
-<meta name="twitter:description" content="Ethem Beldagli is available for hire. View portfolio and projects at https://ethembeldagli.github.io.">
+<meta name="twitter:description" content="Ethem Beldagli is available for hire. View portfolio and projects at [https://ethembeldagli.github.io](https://ethembeldagli.github.io).">
 <meta name="twitter:image" content="https://github.com/ethembeldagli/ethembeldagli.github.io/9d966c989a485296609d890a42e62568d7c09d00/icon.png">
 
 <!-- Favicon icon (PNG format, GitHub raw URL) -->
@@ -169,6 +170,33 @@ body {
     }
     100% { 
         background-position: 0% 50%;
+    }
+}
+
+@keyframes liquidWave {
+    0%, 100% { 
+        transform: translateY(0) scaleX(1);
+    }
+    25% { 
+        transform: translateY(-3px) scaleX(1.05);
+    }
+    50% { 
+        transform: translateY(0) scaleX(1);
+    }
+    75% { 
+        transform: translateY(3px) scaleX(0.95);
+    }
+}
+
+@keyframes skillFloat {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg);
+    }
+    33% { 
+        transform: translateY(-8px) rotate(2deg);
+    }
+    66% { 
+        transform: translateY(-4px) rotate(-2deg);
     }
 }
 
@@ -350,6 +378,109 @@ body {
     margin-bottom: 2rem;
     animation: liquidFloat 5s ease-in-out infinite;
     animation-delay: 0.3s;
+}
+
+/* Skills Container */
+.skills-card {
+    max-width: 600px;
+    width: 100%;
+    padding: 2rem;
+    border-radius: 2rem;
+    margin-bottom: 3rem;
+    animation: liquidFloat 7s ease-in-out infinite;
+    animation-delay: 0.5s;
+    position: relative;
+}
+
+.skills-card::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, 
+        rgba(50, 184, 198, 0.4), 
+        rgba(168, 75, 47, 0.4),
+        rgba(255, 84, 89, 0.4),
+        rgba(50, 184, 198, 0.4));
+    background-size: 300% 300%;
+    border-radius: inherit;
+    z-index: -1;
+    animation: gradientFlow 5s ease infinite;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.skills-card:hover::after {
+    opacity: 1;
+}
+
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.skill-item {
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    background: rgba(50, 184, 198, 0.15);
+    border: 1px solid rgba(50, 184, 198, 0.3);
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-style: italic;
+    cursor: default;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+    animation: skillFloat 4s ease-in-out infinite;
+}
+
+.skill-item:nth-child(2) { animation-delay: 0.2s; }
+.skill-item:nth-child(3) { animation-delay: 0.4s; }
+.skill-item:nth-child(4) { animation-delay: 0.6s; }
+.skill-item:nth-child(5) { animation-delay: 0.8s; }
+.skill-item:nth-child(6) { animation-delay: 1s; }
+.skill-item:nth-child(7) { animation-delay: 1.2s; }
+.skill-item:nth-child(8) { animation-delay: 1.4s; }
+
+.skill-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.3), 
+        transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.skill-item::after {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    background: radial-gradient(circle, rgba(50, 184, 198, 0.4) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    animation: liquidPulse 3s ease-in-out infinite;
+}
+
+.skill-item:hover {
+    transform: scale(1.1) rotate(3deg) translateY(-5px);
+    background: rgba(50, 184, 198, 0.3);
+    border-color: rgba(50, 184, 198, 0.6);
+    box-shadow: 0 5px 20px rgba(50, 184, 198, 0.4);
+    animation: gooeyBlob 2s ease-in-out infinite;
+}
+
+.skill-item:hover::before {
+    transform: translateX(100%);
+    animation: shimmer 1.5s ease infinite;
+}
+
+.skill-item:hover::after {
+    opacity: 1;
 }
 
 /* Project Items */
@@ -600,42 +731,41 @@ body {
     }
 }
 
-      .github-corner {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 80px;
-            height: 80px;
-            z-index: 1000;
-            cursor: pointer;
-        }
+.github-corner {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 80px;
+    z-index: 1000;
+    cursor: pointer;
+}
 
-        .github-corner svg {
-            fill: #fff;
-            color: #151513;
-            border: 0;
-        }
+.github-corner svg {
+    fill: #fff;
+    color: #151513;
+    border: 0;
+}
 
-        .github-corner:hover .octo-arm {
-            animation: octocat-wave 560ms ease-in-out;
-        }
+.github-corner:hover .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+}
 
-        @keyframes octocat-wave {
-            0%, 100% { transform: rotate(0); }
-            20%, 60% { transform: rotate(-25deg); }
-            40%, 80% { transform: rotate(10deg); }
-        }
+@keyframes octocat-wave {
+    0%, 100% { transform: rotate(0); }
+    20%, 60% { transform: rotate(-25deg); }
+    40%, 80% { transform: rotate(10deg); }
+}
 
-        @media (max-width: 500px) {
-            .github-corner:hover .octo-arm {
-                animation: none;
-            }
-            .github-corner .octo-arm {
-                animation: octocat-wave 560ms ease-in-out;
-            }
-        }
+@media (max-width: 500px) {
+    .github-corner:hover .octo-arm {
+        animation: none;
+    }
+    .github-corner .octo-arm {
+        animation: octocat-wave 560ms ease-in-out;
+    }
+}
 
-      
 /* Hide scrollbar for modal */
 .modal-content::-webkit-scrollbar {
     width: 6px;
@@ -673,6 +803,11 @@ body {
     .project-item {
         padding: 1rem 1.5rem;
     }
+    
+    .skill-item {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.8rem;
+    }
 }
 
 /* Smooth scroll */
@@ -682,16 +817,18 @@ html {
     </style>
 </head>
 <body>
-       <a href="https://github.com/ethembeldagli/ethembeldagli.github.io" class="github-corner" aria-label="View source on GitHub" target="_blank">
+    <a href="https://github.com/ethembeldagli/ethembeldagli.github.io" class="github-corner" aria-label="View source on GitHub" target="_blank">
         <svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true">
             <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/>
             <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/>
             <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/>
         </svg>
     </a>
+    
     <div class="fixed-bg"></div>
     <div class="bg-transition" id="bgTransition"></div>
-<div class="content-container">
+    
+    <div class="content-container">
         <section>
             <div class="header-card glass-effect" id="headerCard">
                 <div style="text-align: center;">
@@ -704,6 +841,21 @@ html {
                             <i class="fab fa-github"></i>
                         </a>
                     </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title">Skills</h2>
+            
+            <div class="skills-card glass-effect liquid-distortion">
+                <div class="skills-grid">
+                    <div class="skill-item">HTML</div>
+                    <div class="skill-item">CSS</div>
+                    <div class="skill-item">JavaScript</div>
+                    <div class="skill-item">Web Design</div>
+                    <div class="skill-item">Responsive Design</div>
+                    <div class="skill-item">UI/UX</div>
+                    <div class="skill-item">Git</div>
+                    <div class="skill-item">GitHub Pages</div>
                 </div>
             </div>
             
