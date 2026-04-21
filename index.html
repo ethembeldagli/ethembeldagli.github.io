@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETHEM // THE SPIT</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --border: 3px solid #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: 'Space Mono', monospace;
+            overflow-x: hidden;
+            background-image: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0px, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 12px);
+        }
+
+        .noise {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 999; opacity: 0.08; pointer-events: none;
+            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)"/%3E%3C/svg%3E');
+        }
+
+        #webgl-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; }
+
+        .ui-layer { position: relative; z-index: 10; pointer-events: none; }
+        .ui-layer * { pointer-events: auto; }
+
+        nav {
+            padding: 1.5rem; display: flex; justify-content: space-between;
+            border-bottom: var(--border); text-transform: uppercase;
+            font-weight: 700; background: var(--black);
+        }
+
+        .hero { height: 85vh; display: flex; flex-direction: column; justify-content: center; padding: 2rem; }
+
+        .hero-title {
+            font-family: 'Syne', sans-serif; font-size: clamp(4rem, 18vw, 15rem);
+            line-height: 0.8; text-transform: uppercase; letter-spacing: -0.05em; margin-bottom: 2rem;
+        }
+
+        .status-badge {
+            display: inline-block; background: var(--white); color: var(--black);
+            padding: 0.5rem 1rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1rem;
+        }
+
+        section { padding: 6rem 2rem; border-top: var(--border); background: var(--black); }
+
+        .work-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
+
+        .card { border: var(--border); padding: 2rem; transition: all 0.2s; }
+        .card:hover { background: var(--white); color: var(--black); }
+        .card h3 { font-size: 2.5rem; font-family: 'Syne', sans-serif; margin-bottom: 1rem; text-transform: uppercase; }
+
+        .marquee { width: 100vw; border-top: var(--border); border-bottom: var(--border); padding: 1rem 0; overflow: hidden; background: var(--white); color: var(--black); white-space: nowrap; }
+        .marquee-inner { display: inline-block; font-size: 2.5rem; font-weight: 800; text-transform: uppercase; animation: scroll 15s linear infinite; }
+
+        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        .btn-github { display: inline-block; margin-top: 2rem; padding: 1rem 2rem; border: var(--border); color: var(--white); text-decoration: none; font-weight: 700; transition: 0.2s; }
+        .btn-github:hover { background: var(--white); color: var(--black); }
+
+        #loading-indicator { position: fixed; bottom: 20px; left: 20px; background: var(--white); color: var(--black); padding: 5px 10px; font-weight: bold; z-index: 1000; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <div class="noise"></div>
+    <div id="loading-indicator">INITIATING KEBAB ENGINE...</div>
+    <canvas id="webgl-canvas"></canvas>
+
+    <div class="ui-layer">
+        <nav>
+            <div>ETHEM BELDAGLI // CAMBRIDGE</div>
+            <div>[ CODE FOR HIRE ]</div>
+        </nav>
+
+        <section class="hero" style="background: transparent; border: none;">
+            <div class="status-badge">Available for Work</div>
+            <h1 class="hero-title">ETHEM<br>BELDAGLI</h1>
+            <p style="max-width: 500px; font-size: 1.2rem; line-height: 1.4;">
+                Passionate developer from Cambridge. I like doner kebab. I can code for hire.
+            </p>
+            <div>
+                <a href="https://github.com/ethembeldagli" target="_blank" class="btn-github">CONNECT_GITHUB.EXE</a>
+            </div>
+        </section>
+
+        <section id="work">
+            <h2 style="font-size: 4rem; font-family: 'Syne'; text-transform: uppercase;">THE MENU</h2>
+            <div class="work-grid">
+                <div class="card">
+                    <h3>01. WEBGL</h3>
+                    <p>Real-time 3D experiences that run in the browser. Low latency, high impact.</p>
+                </div>
+                <div class="card">
+                    <h3>02. ARCH</h3>
+                    <p>Robust backend architecture built to scale. Sliced thin for performance.</p>
+                </div>
+                <div class="card">
+                    <h3>03. BRUTAL</h3>
+                    <p>Design that doesn't apologize. Raw, functional, and fast.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="marquee">
+            <div class="marquee-inner">
+                * EXTRA HOT SAUCE * NO ONIONS * CAMBRIDGE TECH * BRUTALIST WEB * THE SPIT * EXTRA HOT SAUCE * NO ONIONS * CAMBRIDGE TECH * BRUTALIST WEB * THE SPIT * </div>
+        </div>
+
+        <footer style="padding: 4rem 2rem; text-align: center; border-top: var(--border);">
+            <p>&copy; 2024 ETHEM BELDAGLI // BUILT IN CAMBRIDGE // KEEP IT CRISPY</p>
+        </footer>
+    </div>
+
+    <script>
+        const canvas = document.querySelector('#webgl-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 8;
+
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+        const light = new THREE.DirectionalLight(0xffffff, 1.5);
+        light.position.set(5, 5, 10);
+        scene.add(light);
+
+        const loader = new THREE.GLTFLoader();
+        const spitGroup = new THREE.Group();
+        scene.add(spitGroup);
+
+        // --- 3D Background Elements (Particles & Shavings) ---
+        const bgGroup = new THREE.Group();
+        scene.add(bgGroup);
+
+        // 1. Floating Spice Particles (Increased amount and spread)
+        const particlesGeo = new THREE.BufferGeometry();
+        const particlesCount = 3000; 
+        const posArray = new Float32Array(particlesCount * 3);
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 80; // Spread widely across the scene
+        }
+        particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMat = new THREE.PointsMaterial({ size: 0.08, color: 0xffffff, transparent: true, opacity: 0.5 });
+        const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
+        bgGroup.add(particlesMesh);
+
+        let modelLoaded = false;
+
+        // Load your model from GitHub CDN
+        const modelUrl = 'https://cdn.jsdelivr.net/gh/ethembeldagli/ethembeldagli.github.io@main/kebab.glb';
+
+        loader.load(modelUrl, (gltf) => {
+            const model = gltf.scene;
+            
+            // 1. Shrink the MAIN model
+            const scaleFactor = 0.5; 
+            model.scale.set(scaleFactor, scaleFactor, scaleFactor);
+
+            // 2. Center the MAIN model
+            const box = new THREE.Box3().setFromObject(model);
+            const center = box.getCenter(new THREE.Vector3());
+            model.position.x += (model.position.x - center.x);
+            model.position.y += (model.position.y - center.y);
+            model.position.z += (model.position.z - center.z);
+
+            spitGroup.add(model);
+
+            // 3. Clone the model for the background floating elements
+            for(let i = 0; i < 40; i++) {
+                const clone = model.clone();
+                
+                // Make the background clones 2x bigger than the main one (with some random variance)
+                const bgScale = scaleFactor * (2 + Math.random() * 1.5); 
+                clone.scale.set(bgScale, bgScale, bgScale);
+                
+                // Scatter them widely so the background isn't empty, pushing them back in Z-space
+                clone.position.set(
+                    (Math.random() - 0.5) * 80, 
+                    (Math.random() - 0.5) * 80, 
+                    (Math.random() - 0.5) * 50 - 30 
+                );
+                
+                // Random starting rotation
+                clone.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+                
+                // Store rotation speeds for the animation loop
+                clone.userData = {
+                    rx: (Math.random() - 0.5) * 0.01,
+                    ry: (Math.random() - 0.5) * 0.01
+                };
+                bgGroup.add(clone);
+            }
+
+            modelLoaded = true;
+            document.getElementById('loading-indicator').innerText = `KEBAB_ENGINE: ONLINE`;
+        }, 
+        (xhr) => {
+            const percent = Math.round((xhr.loaded / xhr.total) * 100);
+            document.getElementById('loading-indicator').innerText = `DOWNLOADING_KEBAB: ${percent}%`;
+        },
+        (e) => {
+            console.error("Error loading model:", e);
+            document.getElementById('loading-indicator').innerText = `ERROR: KEBAB_NOT_FOUND`;
+        });
+
+        // Placeholder geometry while loading
+        const fallback = new THREE.Mesh(
+            new THREE.TorusKnotGeometry(2.5, 0.7, 100, 16), 
+            new THREE.MeshStandardMaterial({ color: 0xffffff, wireframe: true })
+        );
+        scene.add(fallback);
+
+        let mouseX = 0, mouseY = 0;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth - 0.5) * 4;
+            mouseY = (e.clientY / window.innerHeight - 0.5) * 4;
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Consistent rotation for the "Spit" effect
+            spitGroup.rotation.y += 0.015;
+            
+            // Animate 3D background elements
+            bgGroup.rotation.y += 0.002;
+            bgGroup.rotation.x += 0.001;
+            bgGroup.children.forEach(child => {
+                // Check if the child has rotation data (our cloned models)
+                if(child.userData && child.userData.rx !== undefined) {
+                    child.rotation.x += child.userData.rx;
+                    child.rotation.y += child.userData.ry;
+                }
+            });
+
+            if (modelLoaded) {
+                if (fallback.parent) scene.remove(fallback);
+            } else {
+                fallback.rotation.y += 0.01;
+            }
+
+            // Smooth parallax tracking
+            spitGroup.position.x += (mouseX - spitGroup.position.x) * 0.05;
+            spitGroup.position.y += (-mouseY - spitGroup.position.y) * 0.05;
+
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+    </script>
+</body>
+</html>
